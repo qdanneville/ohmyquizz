@@ -11,7 +11,20 @@ export default props => {
 
   useEffect(() => {
     dispatch({ type: "SET_LOADED" });
-  });
+
+    api.then(api => {
+      api
+        .getEntry("30DlkSFvmLSuAMN0rn9hwT")
+        .then(entry => {
+          entry.fields.name["en-US"] = "Super spongeBob";
+          return entry.update();
+        })
+        .then(entry => {
+          setPlayerName(entry.fields.name["en-US"]);
+          console.log(`Entry ${entry.sys.id} updated.`);
+        });
+    });
+  }, []);
 
   const handleClick = () => {};
 
@@ -21,7 +34,7 @@ export default props => {
     <div className="app-wrapper">
       <h1>App wrapper</h1>
       <Home />
-      {playerName ? `Player name is : ${playerName}` : `Player name is :`}
+      {playerName ? `Player name is : ${playerName}` : `Player name is : ...`}
       <button onClick={handleClick} className="block mt-4">
         Change the player name [PUT]
       </button>
