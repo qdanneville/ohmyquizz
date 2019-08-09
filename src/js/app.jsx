@@ -11,17 +11,9 @@ export default props => {
 
   useEffect(() => {
     dispatch({ type: "SET_LOADED" });
+  });
 
-    api
-      .getEntries({
-        content_type: "player"
-      })
-      .then(function(entries) {
-        entries.items.forEach(function(entry) {
-          setPlayerName(entry.fields.name);
-        });
-      });
-  }, []);
+  const handleClick = () => {};
 
   if (!isLoaded) return <h1>Loading...</h1>;
 
@@ -29,7 +21,10 @@ export default props => {
     <div className="app-wrapper">
       <h1>App wrapper</h1>
       <Home />
-      { playerName ? `Player name is : ${playerName}` : `Player name is :`}
+      {playerName ? `Player name is : ${playerName}` : `Player name is :`}
+      <button onClick={handleClick} className="block mt-4">
+        Change the player name [PUT]
+      </button>
     </div>
   );
 };
