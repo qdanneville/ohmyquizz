@@ -76,3 +76,20 @@ dans .src, mkdir utils
 touch api.js
 
 Troisième partie --> heberger en ligne ce que nous venons de faire
+On va sur netlify et on prend notre repo
+On ajoute les fonctions suivantes : 
+
+npm run build pour build le projet
+et dist dans le dossier
+
+Une fois le sie en preview, allez le consulter.
+Maintenant nous allons rajouter des variables d'environnements
+Ajoutons un console.log de notre config pour savoir si c'est okay :)
+
+Bien ! Nous sommes maintenant prêt à coder ! Tout est prêt, et le site est en ligne :)
+
+Okay, maintenant, connectons notre front & notre back avec le client Contentful
+
+npm install contentful --> client contenful pour pouvoir faire des POST/PUT/PATCH/DELETE ...
+
+Retournons dans notre api.js

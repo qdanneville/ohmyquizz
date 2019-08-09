@@ -1,10 +1,10 @@
 import axios from "axios";
 import config from "../../../config";
+import { createClient } from "contentful"
 
-console.log(config);
+const client = createClient({
+  space: config.CONTENTFUL_SPACE_ID,
+  accessToken: config.CONTENTFUL_ACCESS_TOKEN
+})
 
-const instance = axios.create({
-  baseURL: "https://my-json-server.typicode.com/gsohn/json-demo-server/"
-});
-
-export default instance;
+export default client;
