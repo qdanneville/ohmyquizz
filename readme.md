@@ -58,3 +58,21 @@ Ajout des scrits :
     "build": "parcel build src/index.html"
   },
 
+Ourraaa ! 
+
+Seconde partie --> Création de contentful - check
+
+Création du compte
+Récupération des variables d'environnment, de space et d'access token
+
+Troisième partie --> Préparation de l'environnement de production
+
+Création d'un fichier .env qui nous servira à simuler un process.env pour stocker des variables sur le serveur et non dans les fichers de l'application pour la sécurité.
+
+Création d'un fichier config
+
+npm install dotenv
+dans .src, mkdir utils
+touch api.js
+
+Troisième partie --> heberger en ligne ce que nous venons de faire

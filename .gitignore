@@ -1,3 +1,5 @@
+.env.*
+.env
 
 # APPL
 .DS_Store
