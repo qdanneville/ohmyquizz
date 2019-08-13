@@ -15,6 +15,18 @@ const isLoaded = (state = false, action) => {
     }
 };
 
+const title = (state = 'My default title', action) => {
+    switch (action.type) {
+        case "SET_TITLE":
+            return action.payload;
+        case "RESET_TITLE":
+            return '';
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     isLoaded,
+    title,
 });

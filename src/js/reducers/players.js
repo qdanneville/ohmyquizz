@@ -2,23 +2,23 @@ import { combineReducers } from "redux";
 
 const players = (state = [], action) => {
     switch (action.type) {
-        case "SET_PLAYERS":
-            return action.payload;
+        case 'SET_PLAYERS':
+            return action.payload
         default:
-            return state;
+            return state
     }
 }
 
-const PlayersAreLoaded = (state = false, action) => {
+const playersAreLoaded = (state = false, action) => {
     switch (action.type) {
-        case "SET_PLAYERS":
-            return true;
+        case 'SET_PLAYERS':
+            return true
         default:
-            return state;
+            return state
     }
-};
+}
 
 export default combineReducers({
     items: players,
-    areLoaded: PlayersAreLoaded,
+    areLoaded: playersAreLoaded
 });

@@ -22,7 +22,7 @@ export const createEntry = (entryName, data) => {
     })
 }
 
-export function getEntries(contentType) {
+export const getEntries = (contentType) => {
     return new Promise(resolve => {
         api.then(env => {
             env.getEntries({ content_type: contentType })

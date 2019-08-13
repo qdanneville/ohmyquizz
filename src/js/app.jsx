@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { NavLink, Route, Switch } from "react-router-dom";
 import api from "./utils/api"
 
 import Home from "./pages/home";
 import Players from "./pages/players";
+import Game from "./pages/game";
 
 export default props => {
   const dispatch = useDispatch();
@@ -12,21 +13,9 @@ export default props => {
 
   useEffect(() => {
     dispatch({ type: "SET_LOADED" });
-
-    // api.then(api => {
-    //   api
-    //     .getEntry("30DlkSFvmLSuAMN0rn9hwT")
-    //     .then(entry => {
-    //       console.log(entry);
-    //       entry.fields.name["en-US"] = "Super spongeBob";
-    //       return entry.update();
-    //     })
-    //     .then(entry => {
-    //       console.log(entry);
-    //     });
-    // });
+    dispatch({ type: "SET_TITLE", payload: 'My super title' });
+    dispatch({ type: "RESET_TITLE" });
   }, []);
-
 
   if (!isLoaded) return <h1>Loading...</h1>;
 
@@ -35,6 +24,7 @@ export default props => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/players" exact component={Players} />
+        <Route path="/game" exact component={Game} />
       </Switch>
     </div>
   );
