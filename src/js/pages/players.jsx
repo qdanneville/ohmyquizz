@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getEntries } from "../utils/contentful"
 
 import api from "../utils/api";
 
@@ -8,11 +9,7 @@ export default props => {
   const players = useSelector(state => state.players);
 
   useEffect(() => {
-    api.then(api => {
-      api.getEntries({ content_type: "player" }).then(entries => {
-        dispatch({ type: "SET_PLAYERS", payload: entries.items });
-      });
-    });
+    getEntries('player').then(players => dispatch({ type: "SET_PLAYERS", payload: players.items }));
   }, []);
 
   if (!players.areLoaded) return <h1>Players : ...</h1>;
