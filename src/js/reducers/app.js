@@ -6,6 +6,17 @@
 
 import { combineReducers } from "redux";
 
+const windowSize = (state = false, action) => {
+    switch (action.type) {
+        case "SET_APP_FULLSCREEN":
+            return true;
+        case "RESET_APP_FULLSCREEN":
+            return false;
+        default:
+            return state;
+    }
+};
+
 const isLoaded = (state = false, action) => {
     switch (action.type) {
         case "SET_LOADED":
@@ -29,4 +40,5 @@ const title = (state = 'My default title', action) => {
 export default combineReducers({
     isLoaded,
     title,
+    fullscreen: windowSize
 });

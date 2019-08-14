@@ -2,9 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getEntries } from "../utils/contentful"
 
+import { useTitle } from "../components/custom-hook"
+
 export default props => {
   const dispatch = useDispatch();
   const players = useSelector(state => state.players);
+
+  useTitle('derpderp');
 
   useEffect(() => {
     getEntries('player').then(entries => {
