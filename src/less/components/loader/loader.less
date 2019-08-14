@@ -11,3 +11,26 @@
     background-color: red;
     z-index: 9123102312093912039123;
 }
+
+.loader {
+    .block;
+    .w-4;
+    .h-4;
+
+    .bg-orange;
+    .br-2;
+
+    animation: loader 0.5s ease infinite;
+}
+
+@keyframes loader {
+    0%{
+        transform: rotate(0) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(0.9);
+    }
+    100%{
+        transform: rotate(360deg) scale(1);
+    }
+}

@@ -22,6 +22,16 @@ export const createEntry = (entryName, data) => {
     })
 }
 
+export const getEntry = (id) => {
+    return new Promise(resolve => {
+        api.then(env => {
+            env.getEntry(id).then(entry => {
+                resolve(entry);
+            })
+        })
+    })
+}
+
 export const getEntries = (contentType) => {
     return new Promise(resolve => {
         api.then(env => {

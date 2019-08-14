@@ -5,6 +5,51 @@
 */
 
 import { combineReducers } from "redux";
+import { replace } from "connected-react-router"
+import { getEntry } from "../utils/contentful"
+
+export const pickAPlayer = (player) => {
+    return dispatch => {
+        dispatch({ type: 'FETCH_CURRENT_PLAYER' })
+
+        dispatch(replace(`/profile/${player.sys.id}/`));
+        dispatch({ type: 'SET_CURRENT_PLAYER', payload: player });
+    }
+}
+
+export const fetchAPlayer = (playerID) => {
+    return (dispatch) => {
+        dispatch({ type: 'FETCH_CURRENT_PLAYER' })
+        //Asynchrone
+        getEntry(playerID).then(player => {
+            dispatch({ type: 'SET_CURRENT_PLAYER', payload: player })
+        });
+    }
+}
+
+export const currentPlayer = (state = null, action) => {
+    switch (action.type) {
+        case "SET_CURRENT_PLAYER":
+            return action.payload;
+        case "RESET_CURRENT_PLAYER":
+            return null;
+        default:
+            return state;
+    }
+}
+
+export const currentPlayerIsLoading = (state = false, action) => {
+    switch (action.type) {
+        case "FETCH_CURRENT_PLAYER":
+            return true;
+        case "SET_CURRENT_PLAYER":
+            return false;
+        case "RESET_CURRENT_PLAYER":
+            return false;
+        default:
+            return state;
+    }
+}
 
 export const fetchCurrentQuestion = id => {
     return (dispatch, getState) => {
@@ -52,5 +97,7 @@ const questionIsLoading = (state = false, action) => {
 
 export default combineReducers({
     currentQuestion: question,
-    isLoading: questionIsLoading,
+    questionIsLoading: questionIsLoading,
+    currentPlayer,
+    currentPlayerIsLoading
 });
