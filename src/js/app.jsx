@@ -6,6 +6,7 @@ import api from "./utils/api"
 import Home from "./pages/home";
 import Players from "./pages/players";
 import Game from "./pages/game";
+import Layout from "./pages/layout";
 
 export default props => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export default props => {
         <Route path="/" exact component={Home} />
         <Route path="/players" exact component={Players} />
         <Route path="/game" exact component={Game} />
+        <Route path="/layout" exact component={Layout} />
       </Switch>
     </div>
   );
