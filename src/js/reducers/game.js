@@ -5,8 +5,64 @@
 */
 
 import { combineReducers } from "redux";
-import { replace } from "connected-react-router"
-import { getEntry } from "../utils/contentful"
+import { replace, push } from "connected-react-router"
+import { getEntry, getEntries } from "../utils/contentful"
+
+export const pickAGame = (game, playerId) => {
+    return dispatch => {
+        dispatch({ type: 'FETCH_CURRENT_GAME' })
+        dispatch(push(`/profile/${playerId}/game/${game.sys.id}/`));
+        dispatch({ type: 'SET_CURRENT_GAME', payload: game });
+    }
+}
+
+export const fetchAGame = (gameId) => {
+    return (dispatch) => {
+        dispatch({ type: 'FETCH_CURRENT_GAME' })
+
+        //Asynchrone
+        getEntry(gameId).then(game => {
+            dispatch({ type: 'SET_CURRENT_GAME', payload: game })
+        });
+    }
+}
+
+export const currentGame = (state = null, action) => {
+    switch (action.type) {
+        case "SET_CURRENT_GAME":
+            return action.payload;
+        case "RESET_CURRENT_GAME":
+            return null;
+        default:
+            return state;
+    }
+}
+
+export const fetchCurrentPlayerGames = (playerId) => {
+    return dispatch => {
+        dispatch({ type: 'FETCH_CURRENT_GAMES' });
+
+        getEntries('game').then(games => {
+            let actualGames = games.items.filter(game => {
+                if (game.fields.player) {
+                    return game.fields.player['en-US'].sys.id === playerId
+                }
+            })
+            dispatch({ type: 'SET_CURRENT_GAMES', payload: actualGames })
+        })
+    }
+}
+
+export const currentPlayerGames = (state = null, action) => {
+    switch (action.type) {
+        case "SET_CURRENT_GAMES":
+            return action.payload;
+        case "RESET_CURRENT_GAMES":
+            return null;
+        default:
+            return state;
+    }
+}
 
 export const pickAPlayer = (player) => {
     return dispatch => {
@@ -20,6 +76,7 @@ export const pickAPlayer = (player) => {
 export const fetchAPlayer = (playerID) => {
     return (dispatch) => {
         dispatch({ type: 'FETCH_CURRENT_PLAYER' })
+
         //Asynchrone
         getEntry(playerID).then(player => {
             dispatch({ type: 'SET_CURRENT_PLAYER', payload: player })
@@ -99,5 +156,7 @@ export default combineReducers({
     currentQuestion: question,
     questionIsLoading: questionIsLoading,
     currentPlayer,
-    currentPlayerIsLoading
+    currentPlayerIsLoading,
+    currentPlayerGames,
+    currentGame
 });

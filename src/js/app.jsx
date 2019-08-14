@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 import Players from "./pages/players";
 import Profile from "./pages/profile";
+import GameDashboard from "./pages/game-dashboard";
 
 export default props => {
   const isLoaded = useSelector(state => state.app.isLoaded);
